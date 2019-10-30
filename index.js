@@ -4,6 +4,7 @@
 const dotenv = require('dotenv');
 const path = require('path');
 const restify = require('restify');
+var http = require('http');
 var fs = require('fs');
 
 // Import required bot services.
@@ -53,7 +54,6 @@ server.post('/api/messages', (req, res) => {
 });
 
 server.get('/', (req, res) => {
-    console.info('in server.get');
     fs.readFile('index.html', function(err, data) {
         if (err) {
             res.writeHead(404);
