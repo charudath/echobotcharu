@@ -4,8 +4,7 @@
 const dotenv = require('dotenv');
 const path = require('path');
 const restify = require('restify');
-var http = require('http');
-var fs = require("fs");
+var fs = require('fs');
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
@@ -55,10 +54,14 @@ server.post('/api/messages', (req, res) => {
 
 server.get('/', (req, res) => {
     console.info('in server.get');
-    fs.readFile('index.html', function(err, data){
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
+    fs.readFile('index.html', function(err, data) {
+        if (err) {
+            res.writeHead(404);
+            res.write('Siglilla!');
+        } else {
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.write(data);
+        }
         res.end();
-      });
-
+    });
 });
