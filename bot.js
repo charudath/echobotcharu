@@ -6,6 +6,11 @@ const { ActivityHandler } = require('botbuilder');
 class MyBot extends ActivityHandler {
     constructor() {
         super();
+
+        this.onTurn(async (context, next) => { await context.sendActivity(`onTurn called`); await next(); });
+        this.onConversationUpdate(async (context, next) => { await context.sendActivity(`onConversationUpdate called`); await next(); });
+        this.onEvent(async (context, next) => { await context.sendActivity(`onEvent called`); await next(); });
+
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {
             await context.sendActivity(`You said '${ context.activity.text }'`);
